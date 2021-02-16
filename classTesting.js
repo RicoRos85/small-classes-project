@@ -54,3 +54,8 @@ console.log("Min far hedder " + myFather.fullName() + " og er " + myFather.age +
 console.log("Jeg selv hedder " + mySelf.fullName() + " og jeg er " + mySelf.age + " år gammel.");
 // Display my friends @name and @interests.
 console.log(friend1.firstname + " er " + mySelf.fullName() + " bedste ven og han elsker " + friend1.interests + ".");
+
+
+// Make Classes to exportable to other files
+module.exports = Person;
+module.exports = Friend;
