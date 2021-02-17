@@ -7,22 +7,50 @@
 
 const express = require('express');
 const app     = express();
+// Require BCrypt for hashing the Passwords
 const bcrypt  = require('bcrypt');
 
+// Set the View Engine to use ejs libary (see package.json)
+app.set('view-engine', 'ejs');
+
 // Make our app work with JSON
-app.use(express.json());
+// app.use(express.json());
 
 // Import User Classes
 const User    = require('./classTesting.js')
 
 // Create 2 new Users
-let user1 = new User("Rico", "Rosenkrans");
+let user1 = new User("Rico", "Rosenkrans", 24, "Brun");
 let user2 = new User("Malika", "Rosenkrans");
 
 // Save the Users in an array
 let users = [user1,user2];
 
-// Creating Route
+
+/**======================
+ * ROUTES
+ ========================*/
+
+// Creating Route for Frontpage
+app.get('/', (req, res) => {
+    res.render('index.ejs', {
+        fullname: user1.fullName(),
+        age: user1.age,
+        eye: user1.eye
+    });
+});
+
+// Creating Route for Login
+app.get('/login', (req, res) => {
+    res.render('login.ejs');
+});
+
+// Creating Route for Registering
+app.get('/register', (req, res) => {
+    res.render('register.ejs');
+});
+
+// Creating Route for /users
 app.get('/users', (req, res) => {
     res.json(users);
 });
